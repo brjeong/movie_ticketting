@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     </head>
     
-   
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         //총합계
         let sum=0;
@@ -44,7 +44,7 @@
             if(type === 'plus'+lastType) { //플러스 누르면
                 sumCnt(1);  //합계에 1더함
                 if(sum > 8){ //근데 1. 합계가 8보다 크면
-                    alert('예약가능한 인원 수(최대8명)가 초과되었습니다.'); //경고뜬다.
+                    swal('예약가능한 인원 수(최대8명)가 초과되었습니다.'); //경고뜬다.
                     sumCnt(-1); //처음 더했던 1을 다시 빼준다
                 }else if(sum <= 8){ // 근데 2. 합계가 8보다 작으면 ..최대7까지..그래야1더해도 8
                     number = parseInt(number) + 1;  //기존 number에 1을 더해준다
@@ -351,10 +351,10 @@
                     $(".seat_box a").removeClass("active"); //// .seat_box a에 active class를 지워라
             }else{ //안가지고 있다면 active class를 추가해줄껀데
                 if(arr.length == 0){ //만약에 arr.length 총갯수가 0개라면 
-                    alert('인원을 선택해주세요'); //인원 선택하라고 경고창 뜬다
+                    swal('인원을 선택해주세요'); //인원 선택하라고 경고창 뜬다
                 }else{ //0개가 아니라면 아래코드가 실행될껀데
                     if( $('.active').length >= arr.length){ //만약에 active클래스 갯수가 배열크기(위에 성인등 총수)보다 크다면   
-                        alert('인원수를 초과하셨습니다.');
+                        swal('인원수를 초과하셨습니다.');
                     }else{ //크지 않다면 추가해준닾
                         $(this).addClass("active");
                       
