@@ -344,6 +344,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
          $(".seat_box a").click(function(){     //클릭한
+            let aa = document.getElementById($(this));
+             console.log('안에값',aa);
+
             if($(this).hasClass("active")){ // .seat_box a가 active class를 가지고 있다면 
                     $(".seat_box a").removeClass("active"); //// .seat_box a에 active class를 지워라
             }else{ //안가지고 있다면 active class를 추가해줄껀데
@@ -351,9 +354,11 @@
                     alert('인원을 선택해주세요'); //인원 선택하라고 경고창 뜬다
                 }else{ //0개가 아니라면 아래코드가 실행될껀데
                     if( $('.active').length >= arr.length){ //만약에 active클래스 갯수가 배열크기(위에 성인등 총수)보다 크다면   
-                        alert('좌석수를 초과하셨습니다.');
+                        alert('인원수를 초과하셨습니다.');
                     }else{ //크지 않다면 추가해준닾
                         $(this).addClass("active");
+                      
+                        
                     }
                 }
              }       
