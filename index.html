@@ -14,22 +14,11 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     </head>
 
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
-
-    <script type="text/javascript">
-    
-        
-    $(".seat_box a").click(function(){        
-       if(!($(this).hasClass("active"))){
-           $(".seat_box a").removeClass("active");
-           $(this).addClass("active");
-       }       
-    });
-        
-    </script>
-    
     
     <body>
+        
+       
+    
     <div class="cont">
     <div class="top">
     <div class="tit">
@@ -295,7 +284,19 @@
     <button class="go_btn">결제하기</button>
 </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <script type="text/javascript">
+
+        
+$(".seat_box a").click(function(){        
+   if(($(this).hasClass("active"))){
+        $(".seat_box a").removeClass("active");
+   }else{
+       $(this).addClass("active");
+   }       
+});
+          </script>
 
 
     </body>
