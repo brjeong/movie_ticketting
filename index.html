@@ -14,6 +14,12 @@
     <script>
         //총합계
         let sum=0;
+
+        //좌석정보등 담기위한 배열
+        let arr = new Array();
+          
+
+
     
         function sumCnt(number){
             //마이너스 눌렀을때
@@ -42,15 +48,25 @@
                     sumCnt(-1); //처음 더했던 1을 다시 빼준다
                 }else if(sum <= 8){ // 근데 2. 합계가 8보다 작으면 ..최대7까지..그래야1더해도 8
                     number = parseInt(number) + 1;  //기존 number에 1을 더해준다
+                    arr.push(lastType+'좌석추가 '); //+누르면 배열에 추가
+                    console.log(arr);
+                    console.log('배여크기',arr.length);
                 }
             }else if(type === 'minus'+lastType)  {
                 if(number >= 1) {
                     number = parseInt(number) - 1;
                     sumCnt(-1);
+                    arr.pop();  //+누르면 마지막에 고른 배열 삭제
+                    console.log(arr);
+                    console.log('배여크기',arr.length);
                 }
             }
             // 결과 출력
             resultElement.innerText = number;
+
+                         
+            
+
         }
 
     </script>
@@ -327,12 +343,20 @@
    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-         $(".seat_box a").click(function(){       
-            if(($(this).hasClass("active"))){
-                    $(".seat_box a").removeClass("active");
-            }else{
-                $(this).addClass("active");
-            }       
+         $(".seat_box a").click(function(){     //클릭한
+            if($(this).hasClass("active")){ // .seat_box a가 active class를 가지고 있다면 
+                    $(".seat_box a").removeClass("active"); //// .seat_box a에 active class를 지워라
+            }else{ //안가지고 있다면 active class를 추가해줄껀데
+                if(arr.length == 0){ //만약에 arr.length 총갯수가 0개라면 
+                    alert('인원을 선택해주세요'); //인원 선택하라고 경고창 뜬다
+                }else{ //0개가 아니라면 아래코드가 실행될껀데
+                    if( $('.active').length >= arr.length){ //만약에 active클래스 갯수가 배열크기(위에 성인등 총수)보다 크다면   
+                        alert('좌석수를 초과하셨습니다.');
+                    }else{ //크지 않다면 추가해준닾
+                        $(this).addClass("active");
+                    }
+                }
+             }       
         });
     
     </script>
