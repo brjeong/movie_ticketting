@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Ticketing</title>
-        <meta name="description" content="Brackets에 대한 대화식 시작 안내서입니다.">
+        <meta name="description">
         <link rel="stylesheet" href="reset.css">
         <link rel="stylesheet" href="test.css">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     </head>
-    
-   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script>
         //총합계
         let sum=0;
 
-        //좌석정보등 담기위한 배열
+        //좌석정보등 담기위한 배열lo
         let arr = new Array();
-          
 
-
-    
         function sumCnt(number){
             //마이너스 눌렀을때
             if(number < 0){
@@ -41,12 +40,12 @@
             let number = resultElement.innerText;
     
             // 더하기/빼기
-            if(type === 'plus'+lastType) { //플러스 누르면
-                sumCnt(1);  //합계에 1더함
-                if(sum > 8){ //근데 1. 합계가 8보다 크면
-                    swal('예약가능한 인원 수(최대8명)가 초과되었습니다.'); //경고뜬다.
-                    sumCnt(-1); //처음 더했던 1을 다시 빼준다
-                }else if(sum <= 8){ // 근데 2. 합계가 8보다 작으면 ..최대7까지..그래야1더해도 8
+            if(type === 'plus'+lastType) { 
+                sumCnt(1);  
+                if(sum > 8){ 
+                    swal('예약가능한 인원 수(최대8명)가 초과되었습니다.'); 
+                    sumCnt(-1); 
+                }else if(sum <= 8){ 
                     number = parseInt(number) + 1;  //기존 number에 1을 더해준다
                     arr.push(lastType+'좌석추가 '); //+누르면 배열에 추가
                     console.log(arr);
@@ -64,308 +63,367 @@
             // 결과 출력
             resultElement.innerText = number;
 
-                         
-            
-
         }
 
+
+       
     </script>
 
+    <body>   
+        <div class="cont">
+            <div class="top">
+                <div class="tit">
+                    <h1>인원/좌석선택</h1>
+                    <p>&#8226;인원은 최대 8명까지 선택 가능합니다!.</p>
+                </div>     
+            </div>
+            <div class="middle">
+                <div class="info">
+                    <div class="info_img">
+                        <img src="https://caching.lottecinema.co.kr//Media/MovieFile/MovieImg/202108/17635_103_1.jpg" alt="싱크홀">
+                    </div>
+                    <div class="info_box">
+                        <div class="info_tit">
+                            <h2><span class="gr">관람가</span>싱크홀</h2>
+                        </div>
+                        <dl>
+                            <dt class="hidden">일시</dt>
+                            <dd>21.08.09<em>(월)</em>
+                                <span class="time">16:10 ~ 18:10</span>
+                            </dd>
+                            <dt class="hidden">영화관</dt>
+                            <dd>1관<em>(6층입장)</em>
+                                <span>&#8226;일반</span>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <!-- info end-->
+
+                <div class="count">
+                    <ul>
+                        <li>
+                            <strong>성인</strong>
+                            <span>
+                                <button class="btn_minus btn" onclick="count('minusA')">감소</button>
+                                <div class="num" id="resultA">0</div>
+                                <button class="btn_plus btn" onclick="count('plusA')">증가</button>
+                            </span>
+                        </li>
+                        <li>
+                            <strong>청소년</strong>
+                            <span>
+                                <button class="btn_minus btn" onclick="count('minusY')">감소</button>
+                                <div class="num" id="resultY">0</div>
+                                <button class="btn_plus btn" onclick="count('plusY')">증가</button>
+                            </span>
+                        </li>
+                        <li>
+                            <strong>시니어</strong>
+                            <span>
+                                <button class="btn_minus btn" onclick="count('minusS')">감소</button>
+                                <div class="num" id="resultS">0</div>
+                                <button class="btn_plus btn" onclick="count('plusS')">증가</button>
+                            </span>
+                        </li>
+                        <li>
+                            <strong>장애인</strong>
+                            <span>
+                                <button class="btn_minus btn" onclick="count('minusD')">감소</button>
+                                <div class="num" id="resultD">0</div>
+                                <button class="btn_plus btn" onclick="count('plusD')">증가</button>
+                            </span>
+                        </li>          
+                    </ul> 
+                </div>  
+                <!-- count end -->    
+            </div>
+            <!-- middle end -->
+
+            <div class="bottom">
+                <div class="info_txt">
+                    <p>&#45;인원을 선택하세요.</p>
+                </div>
+                <div class="screen_box">
+                    <p>SCREEN</p>
+                </div>
+                <div class="seat_box">
+                   
+                    <div class="seat" id="A">
+                        <span class="seat_tit">A</span>
+                        <a href="#none">1</a>
+                        <a href="#none" class="p1">2</a>
+                        <a href="#none">2</a>
+                        <a href="#none">3</a>
+                        <a href="#none">4</a>
+                        <a href="#none">5</a>
+                        <a href="#none">6</a>
+                        <a href="#none">7</a>
+                        <a href="#none">8</a>
+                        <a href="#none">9</a>
+                        <a href="#none" class="p1">10</a>
+                        <a href="#none">11</a>
+                        <a href="#none">12</a>
+                    </div>
+            
+                    <div class="seat" id="B">
+                        <span class="seat_tit">B</span>
+                        <a href="#none">1</a>
+                        <a href="#none" class="p1">2</a>
+                        <a href="#none">2</a>
+                        <a href="#none">3</a>
+                        <a href="#none">4</a>
+                        <a href="#none">5</a>
+                        <a href="#none">6</a>
+                        <a href="#none">7</a>
+                        <a href="#none">8</a>
+                        <a href="#none">9</a>
+                        <a href="#none" class="p1">10</a>
+                        <a href="#none">11</a>
+                        <a href="#none">12</a>
+                    </div>
+
+                    <div class="seat" id="C">
+                        <span class="seat_tit">C</span>
+                        <a href="#none">1</a>
+                        <a href="#none" class="p1">2</a>
+                        <a href="#none">2</a>
+                        <a href="#none">3</a>
+                        <a href="#none">4</a>
+                        <a href="#none">5</a>
+                        <a href="#none">6</a>
+                        <a href="#none">7</a>
+                        <a href="#none">8</a>
+                        <a href="#none">9</a>
+                        <a href="#none" class="p1">10</a>
+                        <a href="#none">11</a>
+                        <a href="#none">12</a>
+                    </div>
+
+                    <div class="seat" id="D">
+                        <span class="seat_tit">D</span>
+                        <a href="#none">1</a>
+                        <a href="#none" class="p1">2</a>
+                        <a href="#none">2</a> 
+                        <a href="#none">3</a>
+                        <a href="#none">4</a>
+                        <a href="#none">5</a>
+                        <a href="#none">6</a>
+                        <a href="#none">7</a>
+                        <a href="#none">8</a>
+                        <a href="#none">9</a>
+                        <a href="#none" class="p1">10</a>
+                        <a href="#none">11</a>
+                        <a href="#none">12</a>
+                    </div>
+
+                    <div class="seat" id="E">
+                        <span class="seat_tit">E</span>
+                        <a href="#none">1</a>
+                        <a href="#none" class="p1">2</a>
+                        <a href="#none">2</a>
+                        <a href="#none">3</a>
+                        <a href="#none">4</a>
+                        <a href="#none">5</a>
+                        <a href="#none">6</a>
+                        <a href="#none">7</a>
+                        <a href="#none">8</a>
+                        <a href="#none">9</a>
+                        <a href="#none" class="p1">10</a>
+                        <a href="#none">11</a>
+                        <a href="#none">12</a>
+                    </div>
+
+                    <div class="seat" id="F">
+                        <span class="seat_tit">F</span>
+                        <a href="#none">1</a>
+                        <a href="#none" class="p1">2</a>
+                        <a href="#none">2</a>
+                        <a href="#none">3</a>
+                        <a href="#none">4</a>
+                        <a href="#none">5</a>
+                        <a href="#none">6</a>
+                        <a href="#none">7</a>
+                        <a href="#none">8</a>
+                        <a href="#none">9</a>
+                        <a href="#none" class="p1">10</a>
+                        <a href="#none">11</a>
+                        <a href="#none">12</a>
+                    </div>
+
+                    <div class="seat" id="G">
+                        <span class="seat_tit">G</span>
+                        <a href="#none">1</a>
+                        <a href="#none" class="p1">2</a>
+                        <a href="#none">2</a>
+                        <a href="#none">3</a>
+                        <a href="#none">4</a>
+                        <a href="#none">5</a>
+                        <a href="#none">6</a>
+                        <a href="#none">7</a>
+                        <a href="#none">8</a>
+                        <a href="#none">9</a>
+                        <a href="#none" class="p1">10</a>
+                        <a href="#none">11</a>
+                        <a href="#none">12</a>
+                    </div>
+
+                    <div class="seat" id="H">
+                        <span class="seat_tit">H</span>
+                        <a href="#none">1</a>
+                        <a href="#none" class="p1">2</a>
+                        <a href="#none">2</a>
+                        <a href="#none">3</a>
+                        <a href="#none">4</a>
+                        <a href="#none">5</a>
+                        <a href="#none">6</a>
+                        <a href="#none">7</a>
+                        <a href="#none">8</a>
+                        <a href="#none">9</a>
+                        <a href="#none" class="p1">10</a>
+                        <a href="#none">11</a>
+                        <a href="#none">12</a>
+                    </div>
+
+                    <div class="seat" id="I">
+                        <span class="seat_tit">I</span>
+                        <a href="#none">1</a>
+                        <a href="#none" class="p1">2</a>
+                        <a href="#none">2</a>
+                        <a href="#none">3</a>
+                        <a href="#none">4</a>
+                        <a href="#none">5</a>
+                        <a href="#none">6</a>
+                        <a href="#none">7</a>
+                        <a href="#none">8</a>
+                        <a href="#none">9</a>
+                        <a href="#none" class="p1">10</a>
+                        <a href="#none">11</a>
+                        <a href="#none">12</a>
+                    </div>
+
+                    <div class="seat" id="J">
+                        <span class="seat_tit">J</span>
+                        <a href="#none">1</a>
+                        <a href="#none" class="p1">2</a>
+                        <a href="#none">2</a>
+                        <a href="#none">3</a>
+                        <a href="#none">4</a>
+                        <a href="#none">5</a>
+                        <a href="#none">6</a>
+                        <a href="#none">7</a>
+                        <a href="#none">8</a>
+                        <a href="#none">9</a>
+                        <a href="#none" class="p1">10</a>
+                        <a href="#none">11</a>
+                        <a href="#none">12</a>
+                    </div>
+
+                    <div class="seat" id="K">
+                        <span class="seat_tit">K</span>
+                        <a href="#none">1</a>
+                        <a href="#none" class="p1">2</a>
+                        <a href="#none">2</a>
+                        <a href="#none" class="p2 hidden">3</a>
+                        <a href="#none" class="p2 hidden">4</a>
+                        <a href="#none" class="p2 hidden">5</a>
+                        <a href="#none" class="p2 hidden">6</a>
+                        <a href="#none">7</a>
+                        <a href="#none">8</a>
+                        <a href="#none">9</a>
+                        <a href="#none" class="p1">10</a>
+                        <a href="#none">11</a>
+                        <a href="#none" class="p3">12</a>
+                    </div>
+                </div>
+                <!-- seat_box end-->
+            
+                <div class="seat_txt">
+                    <div class="seat_txt_top">
+                        <span class="seat_type1">선택좌석</span>
+                        <span class="seat_type2">선택기능</span>
+                        <span class="seat_type3">예매완료</span>
+                        <span class="seat_type4">선택불가</span>
+                    </div>
+                    <div class="seat_txt_bottom">
+                        <span>거리두기석</span>
+                        <span>스위트스팟</span>
+                        <span>씨네커플</span>
+                        <span>씨네페밀리</span>
+                        <span>리클라이너석</span>
+                        <span>장애인석</span>
+                        <span>발받침</span>
+                        <span>출입문</span>
+                    </div>
+                </div>
+            </div>
+            <!-- bottom end-->
     
-    <body>
-        
-       
-    <div class="cont">
-    <div class="top">
-    <div class="tit">
-      <h1>인원/좌석선택</h1>
-      <p>&#8226;인원은 최대 8명까지 선택 가능합니다!.</p>
+            <div class="go">
+                <button class="go_btn">결제하기</button>
+            </div>
         </div>
-       
-          
-       </div>
-    <div class="middle">
-        <div class="info">
-        <div class="info_img">
-       <img src="https://caching.lottecinema.co.kr//Media/MovieFile/MovieImg/202108/17635_103_1.jpg" alt="싱크홀">
-       </div>
-       <div class="info_box">
-        <div class="info_tit">
-        <h2><span class="gr">관람가</span>싱크홀</h2>
-        </div>
-       <dl>
-       <dt class="hidden">일시</dt>
-       <dd>21.08.09<em>(월)</em>
-       <span class="time">16:10 ~ 18:10</span>
-       </dd>
-       <dt class="hidden">영화관</dt>
-       <dd>1관<em>(6층입장)</em>
-       <span>&#8226;일반</span>
-       </dd>
-       </dl>
-          </div>
-          </div>
-        <div class="count">
-            <ul>
-                <li>
-                <strong>성인</strong>
-                <span>
-                <button class="btn_minus btn" onclick="count('minusA')">감소</button>
-                <div class="num" id="resultA">0</div>
-                <button class="btn_plus btn" onclick="count('plusA')">증가</button>
-                </span>
-                </li>
-                <li>
-                <strong>청소년</strong>
-                <span>
-                <button class="btn_minus btn" onclick="count('minusY')">감소</button>
-                <div class="num" id="resultY">0</div>
-                <button class="btn_plus btn" onclick="count('plusY')">증가</button>
-                </span>
-                </li>
-                <li>
-                <strong>시니어</strong>
-                <span>
-                <button class="btn_minus btn" onclick="count('minusS')">감소</button>
-                <div class="num" id="resultS">0</div>
-                <button class="btn_plus btn" onclick="count('plusS')">증가</button>
-                </span>
-                </li>
-                <li>
-                <strong>장애인</strong>
-                <span>
-                <button class="btn_minus btn" onclick="count('minusD')">감소</button>
-                <div class="num" id="resultD">0</div>
-                <button class="btn_plus btn" onclick="count('plusD')">증가</button>
-                </span>
-                </li>
-               
-            </ul>
+        <!--cont end -->
             
-            
-        </div>
-        
-        
-        
-        
-    </div>
-    <div class="bottom">
-     <div class="info_txt">
-            <p>&#45;인원을 선택하세요.</p>
-     </div>
-     <div class="screen_box">
-         <p>SCREEN</p>
-     </div>
+        <script>
+            let pickSeat = new Array();
 
-    <div class="seat_box">
-        <span class="seat_tit">A</span>
- <a href="#none">1</a>
- <a href="#none" class="p1">2</a>
- <a href="#none">2</a>
- <a href="#none">3</a>
- <a href="#none">4</a>
- <a href="#none">5</a>
- <a href="#none">6</a>
- <a href="#none">7</a>
- <a href="#none">8</a>
- <a href="#none">9</a>
- <a href="#none" class="p1">10</a>
- <a href="#none">11</a>
- <a href="#none">12</a>
-       
-  <span class="seat_tit">B</span>
-        <a href="#none">1</a>
- <a href="#none" class="p1">2</a>
- <a href="#none">2</a>
- <a href="#none">3</a>
- <a href="#none">4</a>
- <a href="#none">5</a>
- <a href="#none">6</a>
- <a href="#none">7</a>
- <a href="#none">8</a>
- <a href="#none">9</a>
- <a href="#none" class="p1">10</a>
- <a href="#none">11</a>
- <a href="#none">12</a>
-         <span class="seat_tit">C</span>
-        <a href="#none">1</a>
- <a href="#none" class="p1">2</a>
- <a href="#none">2</a>
- <a href="#none">3</a>
- <a href="#none">4</a>
- <a href="#none">5</a>
- <a href="#none">6</a>
- <a href="#none">7</a>
- <a href="#none">8</a>
- <a href="#none">9</a>
- <a href="#none" class="p1">10</a>
- <a href="#none">11</a>
- <a href="#none">12</a>
-         <span class="seat_tit">D</span>
-        <a href="#none">1</a>
- <a href="#none" class="p1">2</a>
- <a href="#none">2</a> 
- <a href="#none">3</a>
- <a href="#none">4</a>
- <a href="#none">5</a>
- <a href="#none">6</a>
- <a href="#none">7</a>
- <a href="#none">8</a>
- <a href="#none">9</a>
- <a href="#none" class="p1">10</a>
- <a href="#none">11</a>
- <a href="#none">12</a>
-         <span class="seat_tit">E</span>
-        <a href="#none">1</a>
- <a href="#none" class="p1">2</a>
- <a href="#none">2</a>
- <a href="#none">3</a>
- <a href="#none">4</a>
- <a href="#none">5</a>
- <a href="#none">6</a>
- <a href="#none">7</a>
- <a href="#none">8</a>
- <a href="#none">9</a>
- <a href="#none" class="p1">10</a>
- <a href="#none">11</a>
- <a href="#none">12</a>
-         <span class="seat_tit">F</span>
-        <a href="#none">1</a>
- <a href="#none" class="p1">2</a>
- <a href="#none">2</a>
- <a href="#none">3</a>
- <a href="#none">4</a>
- <a href="#none">5</a>
- <a href="#none">6</a>
- <a href="#none">7</a>
- <a href="#none">8</a>
- <a href="#none">9</a>
- <a href="#none" class="p1">10</a>
- <a href="#none">11</a>
- <a href="#none">12</a>
-         <span class="seat_tit">G</span>
-        <a href="#none">1</a>
- <a href="#none" class="p1">2</a>
- <a href="#none">2</a>
- <a href="#none">3</a>
- <a href="#none">4</a>
- <a href="#none">5</a>
- <a href="#none">6</a>
- <a href="#none">7</a>
- <a href="#none">8</a>
- <a href="#none">9</a>
- <a href="#none" class="p1">10</a>
- <a href="#none">11</a>
- <a href="#none">12</a>
-         <span class="seat_tit">H</span>
-        <a href="#none">1</a>
- <a href="#none" class="p1">2</a>
- <a href="#none">2</a>
- <a href="#none">3</a>
- <a href="#none">4</a>
- <a href="#none">5</a>
- <a href="#none">6</a>
- <a href="#none">7</a>
- <a href="#none">8</a>
- <a href="#none">9</a>
- <a href="#none" class="p1">10</a>
- <a href="#none">11</a>
- <a href="#none">12</a>
-         <span class="seat_tit">I</span>
-        <a href="#none">1</a>
- <a href="#none" class="p1">2</a>
- <a href="#none">2</a>
- <a href="#none">3</a>
- <a href="#none">4</a>
- <a href="#none">5</a>
- <a href="#none">6</a>
- <a href="#none">7</a>
- <a href="#none">8</a>
- <a href="#none">9</a>
- <a href="#none" class="p1">10</a>
- <a href="#none">11</a>
- <a href="#none">12</a>
-         <span class="seat_tit">J</span>
-        <a href="#none">1</a>
- <a href="#none" class="p1">2</a>
- <a href="#none">2</a>
- <a href="#none">3</a>
- <a href="#none">4</a>
- <a href="#none">5</a>
- <a href="#none">6</a>
- <a href="#none">7</a>
- <a href="#none">8</a>
- <a href="#none">9</a>
- <a href="#none" class="p1">10</a>
- <a href="#none">11</a>
- <a href="#none">12</a>
-         <span class="seat_tit">K</span>
-        <a href="#none">1</a>
- <a href="#none" class="p1">2</a>
- <a href="#none">2</a>
- <a href="#none" class="p2 hidden">3</a>
- <a href="#none" class="p2 hidden">4</a>
- <a href="#none" class="p2 hidden">5</a>
- <a href="#none" class="p2 hidden">6</a>
- <a href="#none">7</a>
- <a href="#none">8</a>
- <a href="#none">9</a>
- <a href="#none" class="p1">10</a>
- <a href="#none">11</a>
- <a href="#none" class="p3">12</a>
-        </div>
-        
+            $(".seat_box a").click(function(){     //클릭한
+                let aa = document.getElementById($(this));
+                console.log('안에값',aa);
 
-     <div class="seat_txt">
-        <div class="seat_txt_top">
-            <span class="seat_type1">선택좌석</span>
-            <span class="seat_type2">선택기능</span>
-            <span class="seat_type3">예매완료</span>
-            <span class="seat_type4">선택불가</span>
-        </div>
-        <div class="seat_txt_bottom">
-            <span>거리두기석</span>
-            <span>스위트스팟</span>
-            <span>씨네커플</span>
-            <span>씨네페밀리</span>
-            <span>리클라이너석</span>
-            <span>장애인석</span>
-            <span>발받침</span>
-            <span>출입문</span>
-        </div>
-     </div>
-   </div>
-   
-<div class="go">
-    <button class="go_btn">결제하기</button>
-</div>
-    </div>
-   
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-         $(".seat_box a").click(function(){     //클릭한
-            let aa = document.getElementById($(this));
-             console.log('안에값',aa);
+                if($(this).hasClass("active")){ // .seat_box a가 active class를 가지고 있다면 
+                        $(this).removeClass("active"); //// .seat_box a에 active class를 지워라
 
-            if($(this).hasClass("active")){ // .seat_box a가 active class를 가지고 있다면 
-                    $(".seat_box a").removeClass("active"); //// .seat_box a에 active class를 지워라
-            }else{ //안가지고 있다면 active class를 추가해줄껀데
-                if(arr.length == 0){ //만약에 arr.length 총갯수가 0개라면 
-                    swal('인원을 선택해주세요'); //인원 선택하라고 경고창 뜬다
-                }else{ //0개가 아니라면 아래코드가 실행될껀데
-                    if( $('.active').length >= arr.length){ //만약에 active클래스 갯수가 배열크기(위에 성인등 총수)보다 크다면   
-                        swal('인원수를 초과하셨습니다.');
-                    }else{ //크지 않다면 추가해준닾
-                        $(this).addClass("active");
-                      
+                        test.pop($(this).text()); //배열안에 동일한 값 빼야함
                         
+                        console.log();   
+                }else{ //안가지고 있다면 active class를 추가해줄껀데
+                    if(arr.length == 0){ //만약에 arr.length 총갯수가 0개라면 
+                        swal('인원을 선택해주세요'); //인원 선택하라고 경고창 뜬다
+                    }else{ //0개가 아니라면 아래코드가 실행될껀데
+                        if( $('.active').length >= arr.length){ //만약에 active클래스 갯수가 배열크기(위에 성인등 총수)보다 크다면   
+                            swal('인원수를 초과하셨습니다.');
+                        }else{ //크지 않다면 추가해준닾
+                            $(this).addClass("active");  
+                            
+                            let rowSeat = $(this).closest('.seat').attr('id');
+                            pickSeat.push(rowSeat+'행' + $(this).text() +'열'); 
+                        }
                     }
+                }       
+            });   
+
+            $(".go_btn").click(function(){
+            swal({
+                title: "예약 하시겠습니까?",
+                text: pickSeat+" 총 "+pickSeat.length+"석",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    swal("완료되었습니다.", {
+                    icon: "success",
+                    });
+                } else {
+                    swal("취소되었습니다.");
                 }
-             }       
-        });
+                });
+        }); 
+          
+            
+            
+
+
+    // // 결과를 표시할 element
+    // const resultElement = document.getElementById('result'+lastType);
     
-    </script>
-   
+    // // 현재 화면에 표시된 값
+    // let number = resultElement.innerText;
+
+        </script>
     </body>
 </html>
 
